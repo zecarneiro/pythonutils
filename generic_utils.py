@@ -19,3 +19,10 @@ def get_script_dir(file: str = None) -> str:
 
 def object_to_string(data) -> str:
     return json.dumps(data, cls=CustomEncoder, indent=2)
+
+def run_function(func, **args):
+    if func:
+        if args:
+            func(args)
+        else:
+            func()
