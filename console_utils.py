@@ -23,7 +23,10 @@ class ConsoleUtils:
             if is_windows():
                 subprocess.run(["powershell", "-Command", command_info.command], env=command_info.env, cwd=command_info.cwd)
             else:
-                subprocess.run(command_info.command, shell=True, env=command_info.env, cwd=command_info.cwd)
+                cmd = ["bash", "-c", command_info.command]
+                if is_file(command_info.command):
+                    cmd = ["bash", command_info.command]
+                subprocess.run(cmd, env=command_info.env, cwd=command_info.cwd)
         else:
             if is_windows():
                 subprocess.run(command_info.command, shell=True, env=command_info.env, cwd=command_info.cwd)
