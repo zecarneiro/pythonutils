@@ -1,5 +1,5 @@
 import os
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Union, List
 from pathlib import Path
 
@@ -10,5 +10,5 @@ class CommandInfo:
     args: List[str] = None
     use_shell: bool = True
     verbose: bool = False
-    env = os.environ.copy()
+    env: dict[str, str] = field(default_factory=lambda: os.environ.copy())
     cwd: str = None
